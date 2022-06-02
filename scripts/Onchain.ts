@@ -20,7 +20,7 @@ async function main() {
   console.log(c.address);
   // READ INPUT FILE AND CONVERT TO BYTES
   let bytes: Uint8Array[] = [];
-  let svg = ethers.utils.toUtf8Bytes(fs.readFileSync(`../leogold.svg`, "utf8"));
+  let svg = ethers.utils.toUtf8Bytes(fs.readFileSync(`leogold.svg`, "utf8"));
 
   // CHUNK IT
   for (let i = 0; i < svg.length / CHUNK_SIZE; i++) {
@@ -42,9 +42,9 @@ async function main() {
   // GET IT
   console.log(await c.balanceOf(signers[0].address));
 
-  // const data = await c.tokenURI(0)
-  // console.log(data)
-  // fs.writeFileSync('./Output.svg', ethers.utils.toUtf8String(data))
+  const data = await c.tokenURI(1);
+  console.log(data);
+  fs.writeFileSync("./Output.svg", ethers.utils.toUtf8String(data));
   await new Promise((f) => setTimeout(f, 10000));
 }
 
